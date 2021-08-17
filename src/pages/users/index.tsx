@@ -21,13 +21,12 @@ import { RiAddLine, RiPencilLine } from 'react-icons/ri';
 import { Sidebar } from '../../components/Sidebar';
 import { Header } from '../../components/Header';
 import { Pagination } from '../../components/Pagination';
-import { useEffect } from 'react';
 import { useQuery } from 'react-query';
+import { api } from '../../services/axios';
 
 export default function UserList() {
   const { data, isLoading, isFetching, error } = useQuery('users', async () => {
-    const response = await fetch('/api/users');
-    const data = await response.json();
+    const { data } = await api('/api/users');
 
     const users = data.users.map(user => {
       return {
